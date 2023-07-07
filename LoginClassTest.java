@@ -13,25 +13,33 @@ import org.junit.jupiter.api.BeforeAll;
  *
  * @author thaba
  */
-public class LoginClassTest {
-    
-    public LoginClassTest() {
+Login instance = new Login();
+    public void testCheckUserName(){
+        /**
+      Login instance = new Login();
+    public void testCheckUserName(){
+        /**
+         * This will test whether the CheckUserName method is functional
+         */
+        
+                
+        System.out.println("Username");
+        String username = "kgt_3";
+        boolean expResult = true;
+        boolean result = Login.Login_User.CheckUserName(username);
+        assertEquals(true, result);
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
+    public void testCheckPasswordComplexity(){
+          /**
+         * This will test whether the CheckPasswordComplexity method is functional
+         */
+          
+        System.out.println("Password");
+        String password = "2ja@mes";
+        boolean expResult = true;
+        boolean result = Login.Login_User.CheckPasswordComplexity(password);
+        assertEquals(true, result);
     }
     
 }
