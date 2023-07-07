@@ -13,79 +13,128 @@ import java.util.regex.Pattern;
  */
 public class ST10343509_POE {
 
-    public static void main(String[] args) {
-       
-
-        static boolean CheckPasswordComplexity (String Password) {
-            throw new UnsupportedOperationException("Not supported yet."); 
-        }
-
-    static class Login {
-
-        static boolean CheckPasswordComplexity(String Password) {
-            throw new UnsupportedOperationException("Not supported yet."); 
-        }
-    
-    public class Login_User {
-    
-     public static boolean CheckUserName(String Username){
-         //This method will ensure a user username must contains what is required
-         return Username.contains("_") && Username.length() <= 5;
-  }
-    
-     public static boolean CheckPasswordComplexity(String Password ){
-      
-      Pattern p = Pattern.compile(" [@_#$!%&*()+=-?{}]");
-      
-      if (Password.length() < 9) {
-      return false; 
-      }
-     
-      Matcher n = p.matcher(Password);
-      
-         return n.matches();
-     }
-     
-     
-      public static   String RegisterUser (String Username, String Password ) {
-       // this checks for both the username and password and whether they meet their criteria if noot either of the 2 messages will appear
-    if (CheckUserName(Username) == false && CheckPasswordComplexity(Password) == false) {
-        return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length and  Password is not correctly formatted, please ensure that the password contains atleast 8 characters, a capital letter, a number and a special charcater ";
-   
-    //This will inform the user that their username has been captured but the password is incoreect
-}else if (CheckUserName(Username) == false && CheckPasswordComplexity(Password) == true ) {
- return "Password is not correctly formatted, please ensure that the password contains atleast 8 characters, a capital letter, a number and a special charcater  ";
-  
-  //This will inform the user that their password has been captured but the username is incoreect
- }else if (CheckUserName(Username) == false && CheckPasswordComplexity(Password) == true ) {
- return "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than 5 characters in length  ";
- 
-  
-} else {
- return "The username and password have been captured successfully ";
-            
-}
-      }
-      
-        public static boolean LoginUser (String Username, String Password, String UserNameCheck, String PassWordCheck ){
-
-         return Username.equals(UserNameCheck)&& Password.equals(PassWordCheck);
-        }
-public static String ReturnLoginStatus(String success) {
-
-if(success.equals("success")){
-return "You have successfully logged in";
+   public static void main(String[] args) {
+        // TODO code application logic here
         
-}else{
-return "You have not been logged in ";
-
-}
-
-
+        Login l = new Login();
+        Task t = new Task();
+        
+        
+        Scanner log = new Scanner(System.in);
+        
+    System.out.println("Please enter your first name");
+    String First= log.next();
     
-  }
+    System.out.println("Please enter your Surname");       
+    String Surname = log.next();
+    
+     System.out.println("Please enter your username");
+    String Username =log.next();
+    
+     if(Login.Login_User.CheckUserName(Username) == true) {
+    System.out.println("Username has been captured successfully");
+    
+  System.out.println("Please enter your password");
+    String Password = log.next();
+        
+        if(Login.Login_User.CheckPasswordComplexity(Password) == true){
+        System.out.println("Password has been captured successfully");
+        System.out.println(Login.Login_User.RegisterUser(Username, Password));
+      
+        System.out.println("Please enter your username to sign in ");
+        String UserNameCheck= log.next();
+        
+       System.out.println("Please eneter your password to sign in");
+       String PassWordCheck = log.next();
+       
+        if( Login.Login_User.LoginUser(Username, Password, UserNameCheck, PassWordCheck) == true ) {
+          System.out.println(Login.Login_User.ReturnLoginStatus("success"));
+          System.out.println("Welcome" + First + "" + Surname + "it is great to see you");
+   
+    }else{
+          System.out.println(Login.Login_User.ReturnLoginStatus("Username or password is incorrect please try again "));
+     }
+        
+        }else{
+         System.out.println(Login.Login_User.RegisterUser(Username, Password));
+        }
+     
+    }else {
+             String Password = "";
+             System.out.println(Login.Login_User.RegisterUser(Username, Password));
+    
+    System.out.println("Welcome to kanban");
     }
-    }
+   
+     int Tnumber =0;
+     String Description;
+     int option = 0;
+     int Hours = 0;
+     int StatusChoice;
+     String [] Developer = new String [Tnumber];
+      String [] TaskStatus = new String [Tnumber];
+       int [] TaskDuration = new int [Tnumber];
+        String [] report = new String [Tnumber];
+                String [] TaskNames = new String [Tnumber];
+                 String [] TaskID = new String [Tnumber];
+        
+                   
 
-  
+    JOptionPane.showInputDialog("Please select one of the following: \n\t" + "(1) add tasks \n\t (2) Show report  \n\t (3) Quit");
+    
+        
+    switch(option){
+        
+        case 1:
+            
+        if(option == 1){
+            
+            Tnumber =  Integer.parseInt(JOptionPane.showInputDialog(null, "How many task would you like to add?" , "Task", JOptionPane.QUESTION_MESSAGE));
+            for(int i = 0; i < Tnumber; i++){
+                TaskNames[i] =  JOptionPane.showInputDialog(null, "What is the name of the task name?", "Task Name", JOptionPane.QUESTION_MESSAGE);
+              Developer[i] =  JOptionPane.showInputDialog(null, "What is the name of the developer ?", "Developer Name", JOptionPane.QUESTION_MESSAGE);
+              Description =  JOptionPane.showInputDialog(null, "Please enter a description for the task * Note  not longer than 50 characters");
+           
+              TaskID[i] = t.createTaskID(i + 1, TaskNames[i], Developer[i]);
+              TaskDuration[i] = Integer.parseInt(JOptionPane.showInputDialog("Please enter an amount of hours"));
+              Hours = t.returnTotalHours(Hours, TaskDuration[i]);
+              
+            StatusChoice = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the status of the task out of the folloiwng : \n\t 1. To Do \n\t 2. Done \n\t 3. Doing", "Task Status", JOptionPane.QUESTION_MESSAGE));
+              
+            switch (StatusChoice){
+                
+                
+                case 1 :
+                    
+                    TaskStatus[i] = "To do";
+                    break;
+                    
+                case 2:
+                        TaskStatus[i] = "Done";
+                    break;
+                    
+                case 3:
+                        TaskStatus[i] = "Doing";
+                    break;
+                    
+            }
+          
+            }
+            }
+        
+        case 2:
+            
+            if (option == 2){
+                
+             JOptionPane.showMessageDialog(null,"Coming Soon");
+             break;
+            }
+            
+        case 3:
+            if(option == 3){
+                break;
+            }
+        }
+    }
+}
     
